@@ -2,14 +2,19 @@
 #   Input: A string Text and a string Pattern
 #   Output: A number of Pattern occurrences in Text
 
+from numba import jit
+
+
+@jit(nopython=True)
 def Text(text, i, pattern_len):
-    return text[i:(i+pattern_len)]
+    return text[i:i+pattern_len]
 
 
 # Complexity:
 # - Cycle: n - k + 1
 # - Comparison: k
 # O(n - k + 1) * k
+@jit(nopython=True)
 def PatternCount(text, pattern):
     cnt = 0
     indexes = []

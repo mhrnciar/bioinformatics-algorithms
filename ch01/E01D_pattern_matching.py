@@ -36,8 +36,11 @@ def PatternMatch(text, pattern, complement=False):
 
 
 if __name__ == "__main__":
-    # gene = input("Gene: ").upper()
-    gene = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
+    gene = input("Gene: ").upper()
+    # gene = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
     substr = input("Pattern: ").upper()
 
-    print(PatternMatch(gene, substr, False))
+    tot, ind = PatternMatch(gene, substr, False)
+
+    for item in ind:
+        print(item, end=" ")
