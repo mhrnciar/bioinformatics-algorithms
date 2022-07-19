@@ -1,3 +1,7 @@
+def Text(text, i, pattern_len):
+    return text[i:i+pattern_len]
+
+
 def read_txt(path, skip_num=1):
     with open(path, 'r') as f:
         seq = ""

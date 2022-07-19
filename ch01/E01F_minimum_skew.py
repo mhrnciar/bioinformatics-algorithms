@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from utils import read_txt
 
 
+# Complexity: O(n)
 def MinSkew(genome, show_plot=False):
     graph = [0] * len(genome)
     skew_value, min_skew, min_ind = 0, 1, []

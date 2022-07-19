@@ -4,6 +4,11 @@
 #   Output: All distinct k-mers forming (L, t)-clumps in Genome
 
 
+# Complexity:
+# - Inner cycle: (i + l - k) - i = l - k
+# k is small number which can be ignored in generalisation
+# - Outer cycle: n - l + 1
+# O(n - l + 1) * O(l - k) ~ O(n * l)
 def FindClumps(string, k, window_len, threshold):
     res = set()
 
