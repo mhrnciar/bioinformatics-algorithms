@@ -3,10 +3,12 @@
 #   Input: A DNA string Pattern
 #   Output: Pattern, the reverse complement of Pattern
 
+from utils import complement_key
+
+
 # Complexity: O(n)
 def ReverseComplement(pattern):
     result = ""
-    complement_key = {"C": "G", "G": "C", "A": "T", "T": "A"}
 
     for i in range(len(pattern) - 1, -1, -1):
         result += complement_key.get(pattern[i])
@@ -15,7 +17,7 @@ def ReverseComplement(pattern):
 
 
 if __name__ == "__main__":
-    text = input("Pattern: ").upper()
+    _pattern = input("Pattern: ").upper()
 
-    print(ReverseComplement(text))
+    print(ReverseComplement(_pattern))
 

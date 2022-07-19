@@ -22,31 +22,32 @@ def HammingDistance(str1, str2):
 # - Calculating distance: k
 # O(n - k) * O(k) = O(nk - k^2) ~ O(nk), because n >> k
 def ApproximatePatternCount(text, pattern, threshold):
-    cnt = 0
-    indexes = []
+    count = 0
+    indices = []
 
     for i in range(len(text) - len(pattern)):
         n_pattern = Text(text, i, len(pattern))
-        if HammingDistance(pattern, n_pattern) <= threshold:
-            cnt += 1
-            indexes.append("^")
-        else:
-            indexes.append("-")
 
-    return cnt, indexes
+        if HammingDistance(pattern, n_pattern) <= threshold:
+            count += 1
+            indices.append("^")
+        else:
+            indices.append("-")
+
+    return count, indices
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    # gene = read_txt("../data/GCF_000813165.1_ASM81316v1_genomic_Escherichia_coli.fna", 1)
+    _genome = input("Genome: ").upper()
+    # _genome = read_txt("../data/GCF_000813165.1_ASM81316v1_genomic_Escherichia_coli.fna", 1)
 
-    substr = input("Pattern: ").upper()
-    d = int(input("Threshold: "))
+    _pattern = input("Pattern: ").upper()
+    _threshold = int(input("Threshold: "))
 
-    count, matches = ApproximatePatternCount(gene, substr, d)
+    _count, _matches = ApproximatePatternCount(_genome, _pattern, _threshold)
 
-    print(count)
-    print(gene)
+    print(_count)
+    print(_genome)
 
-    for index in matches:
+    for index in _matches:
         print(index, end="")

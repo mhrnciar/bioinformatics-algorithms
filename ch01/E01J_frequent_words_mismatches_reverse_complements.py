@@ -39,12 +39,12 @@ def MismatchFrequentPatterns(text, k, threshold):
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    size = int(input("k: "))
-    d = int(input("Threshold: "))
+    _genome = input("Genome: ").upper()
+    _k = int(input("k: "))
+    _threshold = int(input("Threshold: "))
 
-    patterns = MismatchFrequentPatterns(gene, size, d)
+    _patterns = MismatchFrequentPatterns(_genome, _k, _threshold)
 
-    for p in patterns:
-        print(p)
+    for pattern in _patterns:
+        print(pattern)
 

@@ -13,9 +13,9 @@ from utils import read_txt
 # - If complement = True: 2 * nk from ApproximatePatternCount + n from ReverseComplement
 # O(2 * nk) + O(n) ~ O(nk)
 def ApproximatePatternMatch(text, pattern, threshold, complement=False):
-    cnt, indexes = ApproximatePatternCount(text, pattern, threshold)
+    count, indexes = ApproximatePatternCount(text, pattern, threshold)
 
-    total = cnt
+    total = count
     result = []
 
     for i in range(len(indexes)):
@@ -36,12 +36,12 @@ def ApproximatePatternMatch(text, pattern, threshold, complement=False):
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    # gene = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
-    substr = input("Pattern: ").upper()
-    d = int(input("Threshold: "))
+    _genome = input("Genome: ").upper()
+    # _genome = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
+    _pattern = input("Pattern: ").upper()
+    _threshold = int(input("Threshold: "))
 
-    tot, ind = ApproximatePatternMatch(gene, substr, d, False)
+    _total, _indices = ApproximatePatternMatch(_genome, _pattern, _threshold, False)
 
-    for item in ind:
+    for item in _indices:
         print(item, end=" ")

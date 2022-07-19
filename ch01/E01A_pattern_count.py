@@ -10,29 +10,29 @@ from utils import Text
 # - Cycle: n - k + 1
 # - Comparison: k
 # O(n - k + 1) * k
-def PatternCount(text, pattern):
-    cnt = 0
-    indexes = []
+def PatternCount(genome, pattern):
+    count = 0
+    indices = []
 
     # Cycle through the string and compare each substring with passed pattern
-    for i in range(len(text) - len(pattern)):
-        if Text(text, i, len(pattern)) == pattern:
-            cnt += 1
-            indexes.append("^")
+    for i in range(len(genome) - len(pattern)):
+        if Text(genome, i, len(pattern)) == pattern:
+            count += 1
+            indices.append("^")
         else:
-            indexes.append("-")
+            indices.append("-")
 
-    return cnt, indexes
+    return count, indices
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    substr = input("Pattern: ").upper()
+    _genome = input("Genome: ").upper()
+    _pattern = input("Pattern: ").upper()
 
-    count, matches = PatternCount(gene, substr)
+    _count, _indices = PatternCount(_genome, _pattern)
 
-    print(count)
-    print(gene)
+    print(_count)
+    print(_genome)
 
-    for index in matches:
+    for index in _indices:
         print(index, end="")

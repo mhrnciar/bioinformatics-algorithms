@@ -12,19 +12,19 @@ from utils import read_txt
 # - If complement = False: (n - k + 1) * k from PatternCount
 # - If complement = True: 2 * (n - k + 1) * k from PatternCount + n from ReverseComplement
 # O(2 * (n - k + 1)) * O(k) + O(n) ~ O(nk)
-def PatternMatch(text, pattern, complement=False):
-    cnt, indexes = PatternCount(text, pattern)
+def PatternMatch(genome, pattern, complement=False):
+    count, indices = PatternCount(genome, pattern)
 
-    total = cnt
+    total = count
     result = []
 
-    for i in range(len(indexes)):
-        if indexes[i] == '^':
+    for i in range(len(indices)):
+        if indices[i] == '^':
             result.append(i)
 
     if complement:
         _, rev_pattern = ReverseComplement(pattern)
-        rev_cnt, rev_indexes = PatternCount(text, rev_pattern)
+        rev_cnt, rev_indexes = PatternCount(genome, rev_pattern)
 
         total += rev_cnt
 
@@ -36,11 +36,11 @@ def PatternMatch(text, pattern, complement=False):
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    # gene = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
-    substr = input("Pattern: ").upper()
+    _genome = input("Genome: ").upper()
+    # _genome = read_txt("../data/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna", 1)
+    _pattern = input("Pattern: ").upper()
 
-    tot, ind = PatternMatch(gene, substr, False)
+    _total, _indices = PatternMatch(_genome, _pattern, False)
 
-    for item in ind:
-        print(item, end=" ")
+    for index in _indices:
+        print(index, end=" ")

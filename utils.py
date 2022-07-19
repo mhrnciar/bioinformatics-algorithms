@@ -1,3 +1,27 @@
+bases = ['A', 'T', 'C', 'G']
+
+complement_key = {
+    'C': 'G',
+    'G': 'C',
+    'A': 'T',
+    'T': 'A'
+}
+
+symbol_key = {
+    'A': 0,
+    'C': 1,
+    'G': 2,
+    'T': 3
+}
+
+number_key = {
+    0: 'A',
+    1: 'C',
+    2: 'G',
+    3: 'T'
+}
+
+
 def Text(text, i, pattern_len):
     return text[i:i+pattern_len]
 

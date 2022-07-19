@@ -3,53 +3,77 @@
 #   Input: A string Text as well as integers k and d
 #   Output: All most frequent k-mers with up to d mismatches in Text
 
-
-from utils import Text
-from ch01.E01G_hamming_distance import HammingDistance
 from collections import defaultdict
+from utils import Text, bases
+from ch01.E01G_hamming_distance import HammingDistance, ApproximatePatternCount
+from ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01M_number_to_pattern import NumberToPattern
+from ch01.E01N_d_neighborhood import Neighbors
 
 
-def _neighbour(pattern, mismatch, words):
-    if mismatch == 0:
-        words.add(pattern)
-    else:
-        bases = ['A', 'T', 'C', 'G']
+def MismatchFrequentWords(genome, k, threshold):
+    freq_patterns = set()
+    freq_arr = [0] * pow(4, k)
+    close = [0] * pow(4, k)
 
-        for i in range(len(pattern)):
-            for base in bases:
-                new_pattern = pattern[:i] + base + pattern[i + 1:]
+    for i in range(len(genome) - k):
+        neighborhood = Neighbors(Text(genome, i, k), threshold)
 
-                if mismatch <= 1:
-                    words.add(new_pattern)
-                else:
-                    _neighbour(new_pattern, mismatch - 1, words)
+        for pattern in neighborhood:
+            index = PatternToNumber(pattern)
+            close[index] = 1
+
+    for i in range(pow(4, k)):
+        if close[i] == 1:
+            pattern = NumberToPattern(i, k)
+            freq_arr[i], _ = ApproximatePatternCount(genome, pattern, threshold)
+
+    max_count = max(freq_arr)
+
+    for i in range(pow(4, k)):
+        if freq_arr[i] == max_count:
+            pattern = NumberToPattern(i, k)
+            freq_patterns.add(pattern)
+
+    return freq_patterns
 
 
-def MismatchFrequentWords(text, k, threshold):
-    all_freq_words = defaultdict(int)
-    result = set()
+def MismatchFrequentWordsBySorting(genome, k, threshold):
+    freq_patterns = set()
+    temp_neighborhoods = list()
 
-    for i in range(len(text) - k + 1):
-        freq_words = set()
+    for i in range(len(genome) - k):
+        temp_neighborhoods.append(Neighbors(Text(genome, i, k), threshold))
 
-        _neighbour(Text(text, i, k), threshold, freq_words)
+    neighborhoods = [x for xs in temp_neighborhoods for x in xs]
+    index = [0] * len(temp_neighborhoods)
+    count = [0] * len(temp_neighborhoods)
 
-        for words in freq_words:
-            all_freq_words[words] += 1
+    for i in range(len(temp_neighborhoods)):
+        pattern = neighborhoods[i]
+        index[i] = PatternToNumber(pattern)
+        count[i] = 1
 
-    max_count = max(all_freq_words.values())
+    index = sorted(index)
 
-    for i in all_freq_words.keys():
-        if all_freq_words[i] == max_count:
-            result.add(i)
+    for i in range(len(temp_neighborhoods) - 1):
+        if index[i] == index[i+1]:
+            count[i+1] = count[i] + 1
 
-    return result
+    max_count = max(count)
+
+    for i in range(len(temp_neighborhoods)):
+        if count[i] == max_count:
+            pattern = NumberToPattern(index[i], k)
+            freq_patterns.add(pattern)
+
+    return freq_patterns
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
-    size = int(input("k: "))
-    d = int(input("Threshold: "))
+    _genome = input("Genome: ").upper()
+    _k = int(input("k: "))
+    _threshold = int(input("Threshold: "))
 
-    for word in MismatchFrequentWords(gene, size, d):
+    for word in MismatchFrequentWordsBySorting(_genome, _k, _threshold):
         print(word)

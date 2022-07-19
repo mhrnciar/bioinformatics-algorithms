@@ -35,7 +35,7 @@ def MinSkew(genome, show_plot=False):
 
 
 if __name__ == "__main__":
-    gene = input("Gene: ").upper()
+    _genome = input("Genome: ").upper()
     # gene = read_txt("../data/GCF_000813165.1_ASM81316v1_genomic_Escherichia_coli.fna", 1)
 
-    print(MinSkew(gene, show_plot=True))
+    print(MinSkew(_genome, show_plot=True))
