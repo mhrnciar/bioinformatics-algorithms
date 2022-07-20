@@ -1,5 +1,5 @@
 from utils import bases
-from ch01.E01G_hamming_distance import HammingDistance
+from py.ch01.E01G_hamming_distance import HammingDistance
 
 
 def ImmediateNeighbors(pattern):

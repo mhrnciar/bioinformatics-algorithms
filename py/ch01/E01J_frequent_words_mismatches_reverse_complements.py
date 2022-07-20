@@ -6,9 +6,9 @@
 
 from collections import defaultdict
 from utils import Text
-from ch01.E01C_reverse_complement import ReverseComplement
-from ch01.E01G_hamming_distance import HammingDistance
-from ch01.E01I_frequent_words_with_mismatches import _neighbour
+from py.ch01.E01C_reverse_complement import ReverseComplement
+from py.ch01.E01G_hamming_distance import HammingDistance
+from py.ch01.E01I_frequent_words_with_mismatches import _neighbour
 
 
 def MismatchFrequentPatterns(text, k, threshold):

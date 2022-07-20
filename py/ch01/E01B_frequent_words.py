@@ -4,7 +4,7 @@
 #   Output: All most frequent k-mers in Text
 
 from utils import Text
-from ch01.E01A_pattern_count import PatternCount
+from py.ch01.E01A_pattern_count import PatternCount
 
 
 # Complexity:

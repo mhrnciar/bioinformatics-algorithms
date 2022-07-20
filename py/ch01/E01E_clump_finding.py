@@ -4,9 +4,9 @@
 #   Output: All distinct k-mers forming (L, t)-clumps in Genome
 
 from utils import Text
-from ch01.E01K_frequency_array import ComputeFrequencies
-from ch01.E01L_pattern_to_number import PatternToNumber
-from ch01.E01M_number_to_pattern import NumberToPattern
+from py.ch01.E01K_frequency_array import ComputeFrequencies
+from py.ch01.E01L_pattern_to_number import PatternToNumber
+from py.ch01.E01M_number_to_pattern import NumberToPattern
 
 
 # Complexity:
