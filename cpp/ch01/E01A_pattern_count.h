@@ -7,9 +7,9 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <vector>
 #include "../utils.h"
 
-std::tuple< int, std::list<char> > PatternCount(const std::string &genome, const std::string &pattern);
+tuple< int, vector<char> > PatternCount(const string &genome, const string &pattern);
 
 #endif //CPP_E01A_PATTERN_COUNT_H

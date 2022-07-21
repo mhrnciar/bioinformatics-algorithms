@@ -21,12 +21,12 @@ def HammingDistance(str1, str2):
 # - For cycle: n - k
 # - Calculating distance: k
 # O(n - k) * O(k) = O(nk - k^2) ~ O(nk), because n >> k
-def ApproximatePatternCount(text, pattern, threshold):
+def ApproximatePatternCount(genome, pattern, threshold):
     count = 0
     indices = []
 
-    for i in range(len(text) - len(pattern)):
-        n_pattern = Text(text, i, len(pattern))
+    for i in range(len(genome) - len(pattern)):
+        n_pattern = Text(genome, i, len(pattern))
 
         if HammingDistance(pattern, n_pattern) <= threshold:
             count += 1

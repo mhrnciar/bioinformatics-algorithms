@@ -4,9 +4,9 @@
 
 #include "E01A_pattern_count.h"
 
-std::tuple< int, std::list<char> > PatternCount(const std::string &genome, const std::string &pattern) {
+tuple< int, vector<char> > PatternCount(const string &genome, const string &pattern) {
     int count = 0;
-    std::list<char> indices;
+    vector<char> indices;
 
     for (unsigned long i = 0; i < genome.size() - pattern.size(); i++) {
         if (Text(genome, i, pattern.size()) == pattern) {
@@ -23,20 +23,20 @@ std::tuple< int, std::list<char> > PatternCount(const std::string &genome, const
 
 /*
 int main() {
-    std::string _genome, _pattern;
+    string _genome, _pattern;
 
-    std::cout << "Genome: ";
-    std::cin >> _genome;
-    std::cout << "Pattern: ";
-    std::cin >> _pattern;
+    cout << "Genome: ";
+    cin >> _genome;
+    cout << "Pattern: ";
+    cin >> _pattern;
 
     auto [count, indices] = PatternCount(_genome, _pattern);
 
-    std::cout << "Count: " << count << std::endl;
-    std::cout << _genome << std::endl;
+    cout << "Count: " << count << endl;
+    cout << _genome << endl;
 
     for (char c : indices) {
-        std::cout << c;
+        cout << c;
     }
 }
  */

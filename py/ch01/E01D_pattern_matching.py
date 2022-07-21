@@ -3,8 +3,8 @@
 #   Input: Strings Pattern and Genome
 #   Output: All starting positions in Genome where Pattern appears as a substring
 
-from py.ch01.E01C_reverse_complement import ReverseComplement
 from py.ch01.E01A_pattern_count import PatternCount
+from py.ch01.E01C_reverse_complement import ReverseComplement
 
 
 # Complexity:
@@ -23,12 +23,12 @@ def PatternMatch(genome, pattern, complement=False):
 
     if complement:
         _, rev_pattern = ReverseComplement(pattern)
-        rev_cnt, rev_indexes = PatternCount(genome, rev_pattern)
+        rev_cnt, rev_indices = PatternCount(genome, rev_pattern)
 
         total += rev_cnt
 
-        for i in range(len(rev_indexes)):
-            if rev_indexes[i] == '^':
+        for i in range(len(rev_indices)):
+            if rev_indices[i] == '^':
                 result.append(i)
 
     return total, result

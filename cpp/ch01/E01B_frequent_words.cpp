@@ -4,12 +4,12 @@
 
 #include "E01B_frequent_words.h"
 
-std::set<std::string> FrequentWords(const string &genome, int k, int limit = -1) {
-    std::set<std::string> freq_words;
-    int *count = static_cast<int *> (calloc(genome.size(), sizeof(int)));
+set<string> FrequentWords(const string &genome, int k, int limit = -1) {
+    set<string> freq_words;
+    int *count = static_cast<int *>(calloc(genome.size(), sizeof(int)));
 
     for (int i = 0; i < genome.size() - k; i++) {
-        std::string pattern = Text(genome, i, k);
+        string pattern = Text(genome, i, k);
         auto [cnt, ind] = PatternCount(genome, pattern);
         count[i] = cnt;
     }
@@ -34,18 +34,20 @@ std::set<std::string> FrequentWords(const string &genome, int k, int limit = -1)
     return freq_words;
 }
 
+/*
 int main() {
-    std::string _genome;
+    string _genome;
     int _k;
 
-    std::cout << "Genome: ";
-    std::cin >> _genome;
-    std::cout << "k: ";
-    std::cin >> _k;
+    cout << "Genome: ";
+    cin >> _genome;
+    cout << "k: ";
+    cin >> _k;
 
     auto freq_words = FrequentWords(_genome, _k);
 
     for (const auto& word : freq_words) {
-        std::cout << word << std::endl;
+        cout << word << endl;
     }
 }
+ */
