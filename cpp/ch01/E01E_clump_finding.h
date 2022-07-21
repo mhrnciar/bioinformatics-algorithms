@@ -5,9 +5,6 @@
 #ifndef CPP_E01E_CLUMP_FINDING_H
 #define CPP_E01E_CLUMP_FINDING_H
 
-#include <iostream>
-#include <string>
-#include <set>
 #include "E01A_pattern_count.h"
 #include "../utils.h"
 

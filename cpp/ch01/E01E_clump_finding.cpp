@@ -22,6 +22,7 @@ set<string> FindClumps(const string &genome, int k, int window_len, int threshol
     return freq_patterns;
 }
 
+/*
 int main() {
     string _genome;
     int _k, _window_len, _threshold;
@@ -42,3 +43,4 @@ int main() {
         cout << word << " ";
     }
 }
+ */

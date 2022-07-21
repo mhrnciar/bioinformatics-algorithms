@@ -5,9 +5,6 @@
 #ifndef CPP_E01G_HAMMING_DISTANCE_H
 #define CPP_E01G_HAMMING_DISTANCE_H
 
-#include <iostream>
-#include <string>
-#include <vector>
 #include <cstdlib>
 #include "../utils.h"
 

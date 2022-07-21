@@ -43,5 +43,37 @@ add_executable(E01H_approximate_pattern_matching
         ch01/E01C_reverse_complement.cpp
         utils.cpp)
 
+add_executable(E01I_frequent_words_mismatches
+        ch01/E01I_frequent_words_mismatches.cpp
+        ch01/E01G_hamming_distance.cpp
+        ch01/E01L_pattern_to_number.cpp
+        ch01/E01M_number_to_pattern.cpp
+        ch01/E01N_d_neighborhood.cpp
+        utils.cpp)
+
+add_executable(E01J_frequent_words_mismatches_reverse_complements
+        ch01/E01J_frequent_words_mismatches_reverse_complements.cpp
+        ch01/E01C_reverse_complement.cpp
+        ch01/E01G_hamming_distance.cpp
+        utils.cpp)
+
+add_executable(E01K_frequency_array
+        ch01/E01K_frequency_array.cpp
+        ch01/E01L_pattern_to_number.cpp
+        utils.cpp)
+
+add_executable(E01L_pattern_to_number
+        ch01/E01L_pattern_to_number.cpp
+        utils.cpp)
+
+add_executable(E01M_number_to_pattern
+        ch01/E01M_number_to_pattern.cpp
+        utils.cpp)
+
+add_executable(E01N_d_neighborhood
+        ch01/E01N_d_neighborhood.cpp
+        ch01/E01G_hamming_distance.cpp
+        utils.cpp)
+
 
 

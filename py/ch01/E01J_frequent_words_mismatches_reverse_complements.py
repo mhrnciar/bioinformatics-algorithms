@@ -5,18 +5,31 @@
 #   over all possible k-mers
 
 from collections import defaultdict
-from utils import Text
+from utils import Text, bases
 from py.ch01.E01C_reverse_complement import ReverseComplement
 from py.ch01.E01G_hamming_distance import HammingDistance
-from py.ch01.E01I_frequent_words_with_mismatches import _neighbour
 
 
-def MismatchFrequentPatterns(text, k, threshold):
+def _neighbour(pattern, mismatch, words):
+    if mismatch == 0:
+        words.add(pattern)
+    else:
+        for i in range(len(pattern)):
+            for base in bases:
+                new_pattern = pattern[:i] + base + pattern[i + 1:]
+
+                if mismatch <= 1:
+                    words.add(new_pattern)
+                else:
+                    _neighbour(new_pattern, mismatch - 1, words)
+
+
+def MismatchFrequentWordsWithRevComps(genome, k, threshold):
     all_frequent_words = defaultdict(int)
 
-    for i in range(len(text) - k + 1):
+    for i in range(len(genome) - k + 1):
         frequent_words = set()
-        _neighbour(Text(text, i, k), threshold, frequent_words)
+        _neighbour(Text(genome, i, k), threshold, frequent_words)
 
         for words in frequent_words:
             all_frequent_words[words] += 1
@@ -24,8 +37,8 @@ def MismatchFrequentPatterns(text, k, threshold):
     for t in all_frequent_words.keys():
         _, reverse_k = ReverseComplement(t)
 
-        for i in range(len(text) - k + 1):
-            if HammingDistance(Text(text, i, k), reverse_k) <= threshold:
+        for i in range(len(genome) - k + 1):
+            if HammingDistance(Text(genome, i, k), reverse_k) <= threshold:
                 all_frequent_words[t] += 1
 
     result = set()
@@ -43,8 +56,8 @@ if __name__ == "__main__":
     _k = int(input("k: "))
     _threshold = int(input("Threshold: "))
 
-    _patterns = MismatchFrequentPatterns(_genome, _k, _threshold)
+    _patterns = MismatchFrequentWordsWithRevComps(_genome, _k, _threshold)
 
-    for pattern in _patterns:
-        print(pattern)
+    for _pattern in _patterns:
+        print(_pattern)
 

@@ -5,9 +5,6 @@
 #ifndef CPP_E01B_FREQUENT_WORDS_H
 #define CPP_E01B_FREQUENT_WORDS_H
 
-#include <iostream>
-#include <string>
-#include <set>
 #include <cstdlib>
 #include "../utils.h"
 #include "E01A_pattern_count.h"

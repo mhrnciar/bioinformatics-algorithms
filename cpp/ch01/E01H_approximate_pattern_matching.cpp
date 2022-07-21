@@ -4,7 +4,8 @@
 
 #include "E01H_approximate_pattern_matching.h"
 
-tuple<int, list<int> > ApproximatePatternMatch(const string &genome, const string &pattern, int threshold, bool complement) {
+tuple<int, list<int> > ApproximatePatternMatch(const string &genome, const string &pattern,
+                                               int threshold, bool complement) {
     auto [count, indices] = ApproximatePatternCount(genome, pattern, threshold);
 
     int total = count;
@@ -32,6 +33,7 @@ tuple<int, list<int> > ApproximatePatternMatch(const string &genome, const strin
     return {total, result};
 }
 
+/*
 int main() {
     string _genome, _pattern;
     int _threshold;
@@ -49,3 +51,4 @@ int main() {
         cout << num << " ";
     }
 }
+ */

@@ -5,9 +5,6 @@
 #ifndef CPP_E01F_MINIMUM_SKEW_H
 #define CPP_E01F_MINIMUM_SKEW_H
 
-#include <iostream>
-#include <string>
-#include <list>
 #include <cstdlib>
 #include "../utils.h"
 
