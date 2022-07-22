@@ -35,7 +35,7 @@ static map<int, char> number_key = {
         { 3, 'T' }
 };
 
-static vector<char> bases = {'C', 'G', 'A', 'T'};
+static vector<string> bases = {"C", "G", "A", "T"};
 
 string Text(const string &genome, unsigned long i, unsigned long pattern_len);
 

@@ -3,15 +3,18 @@ project(cpp)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# ---------- EXERCISES ----------
+# ---------- TARGETS ----------
 # CHAPTER 1
 add_executable(E01A_pattern_count
         ch01/E01A_pattern_count.cpp
         utils.cpp)
 
 add_executable(E01B_frequent_words
-        ch01/E01B_frequent_words.cpp
         ch01/E01A_pattern_count.cpp
+        ch01/E01B_frequent_words.cpp
+        ch01/E01K_frequency_array.cpp
+        ch01/E01L_pattern_to_number.cpp
+        ch01/E01M_number_to_pattern.cpp
         utils.cpp)
 
 add_executable(E01C_reverse_complement
@@ -27,6 +30,9 @@ add_executable(E01D_pattern_matching
 add_executable(E01E_clump_finding
         ch01/E01E_clump_finding.cpp
         ch01/E01A_pattern_count.cpp
+        ch01/E01K_frequency_array.cpp
+        ch01/E01L_pattern_to_number.cpp
+        ch01/E01M_number_to_pattern.cpp
         utils.cpp)
 
 add_executable(E01F_minimum_skew

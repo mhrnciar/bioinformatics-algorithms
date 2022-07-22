@@ -14,4 +14,6 @@
 
 set<string> MismatchFrequentWords(const string &genome, int k, int threshold);
 
+set<string> MismatchFrequentWordsBySorting(const string &genome, int k, int threshold);
+
 #endif //CPP_E01I_FREQUENT_WORDS_MISMATCHES_H

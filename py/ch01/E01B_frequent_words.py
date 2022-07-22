@@ -5,6 +5,7 @@
 
 from utils import Text
 from py.ch01.E01A_pattern_count import PatternCount
+from py.ch01.E01K_frequency_array import ComputeFrequencies
 
 
 # Complexity:

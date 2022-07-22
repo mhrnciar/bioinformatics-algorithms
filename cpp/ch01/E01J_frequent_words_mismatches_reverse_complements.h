@@ -10,7 +10,6 @@
 #include "E01G_hamming_distance.h"
 #include "E01I_frequent_words_mismatches.h"
 
-tuple<int, list<int> > MismatchFrequentWordsWithRevComps(const string &genome, int k,
-                                                         int threshold, bool complement = false);
+set<string> MismatchFrequentWordsWithRevComps(const string &genome, int k, int threshold);
 
 #endif //CPP_E01J_FREQUENT_WORDS_MISMATCHES_REVERSE_COMPLEMENTS_H

@@ -10,7 +10,7 @@ set<string> ImmediateNeighbors(const string &pattern) {
     for (int i = 0; i < pattern.size(); i++) {
         for (auto base : bases) {
             string temp = pattern;
-            temp[i] = base;
+            temp[i] = base.c_str()[0];
 
             neighborhood.insert(temp);
         }
@@ -25,8 +25,7 @@ set<string> Neighbors(const string &pattern, int d) {
     }
 
     if (pattern.size() == 1) {
-        return {string(1, bases[0]), string(1, bases[1]),
-                string(1, bases[2]), string(1, bases[3])};
+        return {bases[0], bases[1], bases[2], bases[3]};
     }
 
     set<string> neighborhood;
@@ -34,9 +33,9 @@ set<string> Neighbors(const string &pattern, int d) {
 
     for (const string &text : suffix_neighbors) {
         if (HammingDistance(pattern.substr(1, pattern.size()), text) < d) {
-            for (auto base : bases) {
+            for (const auto& base : bases) {
                 auto temp = text;
-                neighborhood.insert(temp.insert(0, 1, base));
+                neighborhood.insert(base + temp);
             }
         }
         else {
