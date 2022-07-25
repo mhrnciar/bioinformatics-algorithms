@@ -3,7 +3,7 @@
 #   Input: A string Text as well as integers k and d
 #   Output: All most frequent k-mers with up to d mismatches in Text
 
-from utils import Text
+from utils import text
 from py.ch01.E01G_hamming_distance import ApproximatePatternCount
 from py.ch01.E01L_pattern_to_number import PatternToNumber
 from py.ch01.E01M_number_to_pattern import NumberToPattern
@@ -16,7 +16,7 @@ def MismatchFrequentWords(genome, k, threshold):
     close = [0] * pow(4, k)
 
     for i in range(len(genome) - k):
-        neighborhood = Neighbors(Text(genome, i, k), threshold)
+        neighborhood = Neighbors(text(genome, i, k), threshold)
 
         for pattern in neighborhood:
             index = PatternToNumber(pattern)
@@ -42,7 +42,7 @@ def MismatchFrequentWordsBySorting(genome, k, threshold):
     temp_neighborhoods = list()
 
     for i in range(len(genome) - k):
-        temp_neighborhoods.append(Neighbors(Text(genome, i, k), threshold))
+        temp_neighborhoods.append(Neighbors(text(genome, i, k), threshold))
 
     neighborhoods = [x for xs in temp_neighborhoods for x in xs]
     index = [0] * len(temp_neighborhoods)

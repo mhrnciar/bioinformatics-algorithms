@@ -3,7 +3,7 @@
 #   Input: A string Genome, and integers k, L, and t
 #   Output: All distinct k-mers forming (L, t)-clumps in Genome
 
-from utils import Text
+from utils import text
 from py.ch01.E01K_frequency_array import ComputeFrequencies
 from py.ch01.E01L_pattern_to_number import PatternToNumber
 from py.ch01.E01M_number_to_pattern import NumberToPattern
@@ -19,9 +19,9 @@ def FindClumps(genome, k, window_len, threshold):
 
     for i in range(len(genome) - window_len + 1):
         for j in range(i, i + window_len - k):
-            pattern = Text(genome, j, k)
+            pattern = text(genome, j, k)
 
-            if Text(genome, i, window_len).count(pattern) == threshold:
+            if text(genome, i, window_len).count(pattern) == threshold:
                 res.add(pattern)
 
     return res
@@ -33,7 +33,7 @@ def FindClumpsWithFrequencies(genome, k, window_len, threshold):
     clumps = [0] * pow(4, k)
 
     for i in range(len(genome) - window_len):
-        substr = Text(genome, i, window_len)
+        substr = text(genome, i, window_len)
         freq_arr = ComputeFrequencies(substr, k)
 
         for j in range(pow(4, k)):
@@ -52,7 +52,7 @@ def FastFindClumps(genome, k, window_len, threshold):
     freq_patterns = set()
     clumps = [0] * pow(4, k)
 
-    substr = Text(genome, 0, window_len)
+    substr = text(genome, 0, window_len)
     freq_arr = ComputeFrequencies(substr, k)
 
     for i in range(pow(4, k)):
@@ -62,11 +62,11 @@ def FastFindClumps(genome, k, window_len, threshold):
     # Frequency array is generated only once and with moving window, we only recalculate the first and the last
     # patterns, which are the only ones that change
     for i in range(1, len(genome) - window_len):
-        first_pattern = Text(genome, i - 1, k)
+        first_pattern = text(genome, i - 1, k)
         index = PatternToNumber(first_pattern)
         freq_arr[index] -= 1
 
-        last_pattern = Text(genome, i + window_len - k, k)
+        last_pattern = text(genome, i + window_len - k, k)
         index = PatternToNumber(last_pattern)
         freq_arr[index] += 1
 

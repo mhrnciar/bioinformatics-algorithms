@@ -5,7 +5,7 @@
 #   over all possible k-mers
 
 from collections import defaultdict
-from utils import Text, bases
+from utils import text, bases
 from py.ch01.E01C_reverse_complement import ReverseComplement
 from py.ch01.E01G_hamming_distance import HammingDistance
 
@@ -29,7 +29,7 @@ def MismatchFrequentWordsWithRevComps(genome, k, threshold):
 
     for i in range(len(genome) - k + 1):
         frequent_words = set()
-        _neighbour(Text(genome, i, k), threshold, frequent_words)
+        _neighbour(text(genome, i, k), threshold, frequent_words)
 
         for words in frequent_words:
             all_frequent_words[words] += 1
@@ -38,7 +38,7 @@ def MismatchFrequentWordsWithRevComps(genome, k, threshold):
         _, reverse_k = ReverseComplement(t)
 
         for i in range(len(genome) - k + 1):
-            if HammingDistance(Text(genome, i, k), reverse_k) <= threshold:
+            if HammingDistance(text(genome, i, k), reverse_k) <= threshold:
                 all_frequent_words[t] += 1
 
     result = set()

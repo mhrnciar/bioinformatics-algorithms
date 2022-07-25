@@ -1,3 +1,12 @@
+import fileinput
+
+import logomaker
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+plt.ion()
+
 bases = ['A', 'T', 'C', 'G']
 
 complement_key = {
@@ -22,11 +31,25 @@ number_key = {
 }
 
 
-def Text(text, i, pattern_len):
-    return text[i:i+pattern_len]
+def text(genome: str, i: int, pattern_len: int) -> str:
+    return genome[i:i+pattern_len]
 
 
-def read_txt(path, skip_num=1):
+def generate_patterns(k: int, arr: [str] = None, prefix: str = "") -> [str]:
+    if arr is None:
+        arr = list()
+    if k == 0:
+        arr.append(prefix)
+        return arr
+
+    for base in bases:
+        new_prefix = prefix + base
+        generate_patterns(k - 1, arr, new_prefix)
+
+    return arr
+
+
+def read_txt(path: str, skip_num: int = 1) -> str:
     with open(path, 'r') as f:
         seq = ""
 
@@ -43,5 +66,84 @@ def read_txt(path, skip_num=1):
         return seq
 
 
+def entropy(dist: [float]) -> float:
+    total = 0
+
+    for prob in dist:
+        if prob == 0:
+            total += 0
+        else:
+            total += prob*np.log2(prob)
+
+    return -total
+
+
+def score(motifs):
+    total = 0
+
+    for i in range(len(motifs[0])):
+        j = [motif[i] for motif in motifs]
+        total += (len(j) - max(j.count("A"), j.count("C"), j.count("T"), j.count("G")))
+
+    return total
+
+
+def motif_score(dna: [str], score_type: str = 'counts') -> pd.DataFrame:
+    genome_len = len(dna[0])
+    counts = np.zeros((4, genome_len), dtype=int)
+
+    for genome in dna:
+        for i in range(len(genome)):
+            symbol = symbol_key.get(genome[i])
+            counts[symbol][i] += 1
+
+    df = pd.DataFrame(counts).T
+    df.columns = list(symbol_key.keys())
+
+    if score_type == 'counts':
+        return df
+    elif score_type == 'profile':
+        return df / len(dna)
+
+
+def generate_probs(n: int) -> pd.DataFrame:
+    arr = np.zeros((4, n), dtype=float)
+    i = 0
+
+    for line in fileinput.input():
+        line = line.strip().split(' ')
+
+        for j in range(len(line)):
+            arr[i][j] = line[j]
+
+        i += 1
+        if i == 4:
+            break
+
+    df = pd.DataFrame(arr).T
+    df.columns = list(symbol_key.keys())
+
+    return df
+
+
+def display_logo(dna: [str], save: bool = False, fig_path: str = '', fig_name: str = 'logo'):
+    df = motif_score(dna, score_type='profile')
+
+    logo = logomaker.Logo(df, font_name='Arial Rounded MT Bold')
+
+    if save:
+        if fig_path[-1] != '/':
+            fig_path += '/'
+        plt.savefig('{}{}.pdf'.format(fig_path, fig_name))
+
+    plt.show()
+
+
 if __name__ == "__main__":
-    read_txt("/Users/mhrnciar/Downloads/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna")
+    # read_txt("/Users/mhrnciar/Downloads/GCF_000006745.1_ASM674v1_genomic_Vibrio_cholerae.fna")
+    # print(entropy([0.0, 0.6, 0.0, 0.4]))
+
+    _genome = input("Genome: ")
+    _n = int(input("n: "))
+
+    print(profile_probability(_genome, _n))

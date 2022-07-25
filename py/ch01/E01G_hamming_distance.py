@@ -3,7 +3,7 @@
 #   Input: Two strings of equal length
 #   Output: The Hamming distance between these strings
 
-from utils import Text
+from utils import text
 
 
 # Complexity: O(n)
@@ -26,7 +26,7 @@ def ApproximatePatternCount(genome, pattern, threshold):
     indices = []
 
     for i in range(len(genome) - len(pattern)):
-        n_pattern = Text(genome, i, len(pattern))
+        n_pattern = text(genome, i, len(pattern))
 
         if HammingDistance(pattern, n_pattern) <= threshold:
             count += 1

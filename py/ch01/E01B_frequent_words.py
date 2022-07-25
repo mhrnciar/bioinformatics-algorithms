@@ -3,7 +3,7 @@
 #   Input: A string Text and an integer k
 #   Output: All most frequent k-mers in Text
 
-from utils import Text
+from utils import text
 from py.ch01.E01A_pattern_count import PatternCount
 from py.ch01.E01K_frequency_array import ComputeFrequencies
 
@@ -19,7 +19,7 @@ def FrequentWords(genome, k, limit=None):
 
     # For every index, get pattern of length k and count how many times the pattern appears in the string
     for i in range(len(genome) - k):
-        pattern = Text(genome, i, k)
+        pattern = text(genome, i, k)
         count[i], _ = PatternCount(genome, pattern)
 
     if limit is None:
@@ -29,13 +29,13 @@ def FrequentWords(genome, k, limit=None):
         # Cycle through the list and append to set of frequent patterns the ones whose count equals the maximum count
         for i in range(len(genome) - k):
             if count[i] == max_count:
-                frequent_patterns.add(Text(genome, i, k))
+                frequent_patterns.add(text(genome, i, k))
 
     else:
         # Cycle through the list and append to set of frequent patterns the ones whose count is more than the limit
         for i in range(len(genome) - k):
             if count[i] >= limit:
-                frequent_patterns.add(Text(genome, i, k))
+                frequent_patterns.add(text(genome, i, k))
 
     return frequent_patterns
 
@@ -59,7 +59,7 @@ def FastFrequentWordsBySorting(genome, k):
     count = [0] * (len(genome) - k)
 
     for i in range(len(genome) - k):
-        pattern = Text(genome, i, k)
+        pattern = text(genome, i, k)
         index[i] = PatternToNumber(pattern)
         count[i] = 1
 

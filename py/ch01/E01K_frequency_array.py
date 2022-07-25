@@ -1,4 +1,4 @@
-from utils import Text
+from utils import text
 from py.ch01.E01L_pattern_to_number import PatternToNumber
 
 
@@ -6,7 +6,7 @@ def ComputeFrequencies(genome, k):
     freq_arr = [0] * pow(4, k)
 
     for i in range(len(genome) - k + 1):
-        pattern = Text(genome, i, k)
+        pattern = text(genome, i, k)
         j = PatternToNumber(pattern)
         freq_arr[j] += 1
 

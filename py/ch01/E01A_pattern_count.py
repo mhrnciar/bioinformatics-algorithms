@@ -3,7 +3,7 @@
 #   Output: A number of Pattern occurrences in Text
 
 
-from utils import Text
+from utils import text
 
 
 # Complexity:
@@ -16,7 +16,7 @@ def PatternCount(genome, pattern):
 
     # Cycle through the string and compare each substring with passed pattern
     for i in range(len(genome) - len(pattern)):
-        if Text(genome, i, len(pattern)) == pattern:
+        if text(genome, i, len(pattern)) == pattern:
             count += 1
             indices.append("^")
         else:
