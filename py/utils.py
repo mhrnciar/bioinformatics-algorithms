@@ -66,6 +66,49 @@ def read_txt(path: str, skip_num: int = 1) -> str:
         return seq
 
 
+def read_lines(prompt='DNA strings separated with newlines, end with ', end_with='int'):
+    result = []
+    val = 0
+
+    if end_with == ' ':
+        print(prompt + 'space: ')
+
+        while True:
+            inp = input('')
+
+            if inp != ' ':
+                result.append(inp)
+            else:
+                break
+    elif end_with == 'float':
+        print(prompt + 'float: ')
+
+        while True:
+            inp = input('')
+
+            try:
+                val = float(inp)
+                break
+            except ValueError:
+                result.append(inp)
+    else:
+        print(prompt + 'int: ')
+
+        while True:
+            inp = input('')
+
+            try:
+                val = int(inp)
+                break
+            except ValueError:
+                result.append(inp)
+
+    if end_with == ' ':
+        return result
+    else:
+        return result, val
+
+
 def entropy(dist: [float]) -> float:
     total = 0
 

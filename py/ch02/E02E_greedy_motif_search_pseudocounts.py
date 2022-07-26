@@ -1,4 +1,4 @@
-from py.utils import text, score, bases
+from py.utils import text, read_lines, score, bases
 from py.ch02.E02C_profile_most_probable_kmer import MostProbableKmer
 
 
@@ -14,16 +14,10 @@ def GreedyMotifSearchWithPseudocounts(dna, k, t):
 
             for base in bases:
                 mat = []
-                total = 0
 
                 for j in range(k):
                     mm = [m[j] for m in _motifs]
-                    total += mm.count(base) + 1
-
-                    mat.append(mm.count(base) + 1)
-
-                for j in range(k):
-                    mat[j] /= total
+                    mat.append((mm.count(base) + 1) / (len(mm) + 4))
 
                 matrix.append(mat)
 
@@ -36,18 +30,7 @@ def GreedyMotifSearchWithPseudocounts(dna, k, t):
 
 
 if __name__ == "__main__":
-    _dna = []
-
-    print("DNA strings separated with spaces and k: ")
-    while True:
-        inp = input("")
-        try:
-            val = int(inp)
-            _k = val
-            break
-        except ValueError:
-            _dna.append(inp)
-
+    _dna, _k = read_lines(end_with='int')
     _t = int(input("t: "))
 
     for _word in GreedyMotifSearchWithPseudocounts(_dna, _k, _t):

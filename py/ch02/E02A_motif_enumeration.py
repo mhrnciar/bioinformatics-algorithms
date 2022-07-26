@@ -3,7 +3,7 @@
 #   Input: A collection of strings Dna, and integers k and d
 #   Output: All (k, d)-motifs in Dna
 
-from utils import text
+from utils import text, read_lines
 from py.ch01.E01N_d_neighborhood import Neighbors
 
 
@@ -32,18 +32,7 @@ def MotifEnumeration(dna, k, d):
 
 
 if __name__ == "__main__":
-    _dna = []
-
-    print("DNA strings separated with spaces and k: ")
-    while True:
-        inp = input("")
-        try:
-            val = int(inp)
-            _k = val
-            break
-        except ValueError:
-            _dna.append(inp)
-
+    _dna, _k = read_lines(end_with='int')
     _d = int(input("d: "))
 
     for _word in MotifEnumeration(_dna, _k, _d):

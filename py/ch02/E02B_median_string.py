@@ -3,8 +3,11 @@
 #   Input: A collection of strings Dna and an integer k
 #   Output: A k-mer Pattern minimizing d(Pattern, Dna) among all k-mers Pattern
 
-from utils import text, generate_patterns, bases
+from utils import text, read_lines, generate_patterns, bases
 from py.ch01.E01G_hamming_distance import HammingDistance
+from py.ch01.E01L_pattern_to_number import PatternToNumber
+from py.ch01.E01M_number_to_pattern import NumberToPattern
+from py.ch02.E02H_distance_patterns_strings import DistanceBetweenPatternsStrings
 
 
 def MinHammingDistance(genome, pattern, k):
@@ -42,18 +45,23 @@ def MedianString(dna, k):
     return medians
 
 
-if __name__ == "__main__":
-    _dna = []
+def MedianStringVar(dna, k):
+    distance = 10_000_000
+    median = ""
 
-    print("DNA strings separated with spaces and k: ")
-    while True:
-        inp = input("")
-        try:
-            val = int(inp)
-            _k = val
-            break
-        except ValueError:
-            _dna.append(inp)
+    for i in range(pow(4, k) - 1):
+        pattern = NumberToPattern(i, k)
+        n_distance = DistanceBetweenPatternsStrings(dna, pattern)
+
+        if distance > n_distance:
+            distance = n_distance
+            median = pattern
+
+    return median
+
+
+if __name__ == "__main__":
+    _dna, _k = read_lines(end_with='int')
 
     for word in MedianString(_dna, _k):
         print(word)

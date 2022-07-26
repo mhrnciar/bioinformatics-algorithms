@@ -1,4 +1,4 @@
-from py.utils import text, score, bases
+from py.utils import text, read_lines, score, bases
 from py.ch02.E02C_profile_most_probable_kmer import MostProbableKmer
 
 
@@ -30,18 +30,7 @@ def GreedyMotifSearch(dna, k, t):
 
 
 if __name__ == "__main__":
-    _dna = []
-
-    print("DNA strings separated with spaces and k: ")
-    while True:
-        inp = input("")
-        try:
-            val = int(inp)
-            _k = val
-            break
-        except ValueError:
-            _dna.append(inp)
-
+    _dna, _k = read_lines(end_with='int')
     _t = int(input("t: "))
 
     for _word in GreedyMotifSearch(_dna, _k, _t):
