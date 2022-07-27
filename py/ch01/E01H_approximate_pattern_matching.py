@@ -3,8 +3,8 @@
 #   Input: Strings Pattern and Text along with an integer d
 #   Output: All starting positions where Pattern appears as a substring of Text with at most d mismatches
 
-from py.ch01.E01C_reverse_complement import ReverseComplement
-from py.ch01.E01G_hamming_distance import ApproximatePatternCount
+from ch01.E01C_reverse_complement import ReverseComplement
+from ch01.E01G_hamming_distance import ApproximatePatternCount
 
 
 # Complexity:

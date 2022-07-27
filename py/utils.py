@@ -109,6 +109,14 @@ def read_lines(prompt='DNA strings separated with newlines, end with ', end_with
         return result, val
 
 
+def prefix(pattern, back=1):
+    return pattern[0:len(pattern) - back]
+
+
+def suffix(pattern, front=1):
+    return pattern[front:len(pattern)]
+
+
 def entropy(dist: [float]) -> float:
     total = 0
 

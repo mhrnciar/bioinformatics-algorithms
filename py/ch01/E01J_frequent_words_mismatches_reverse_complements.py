@@ -5,9 +5,10 @@
 #   over all possible k-mers
 
 from collections import defaultdict
+
 from utils import text, bases
-from py.ch01.E01C_reverse_complement import ReverseComplement
-from py.ch01.E01G_hamming_distance import HammingDistance
+from ch01.E01C_reverse_complement import ReverseComplement
+from ch01.E01G_hamming_distance import HammingDistance
 
 
 def _neighbour(pattern, mismatch, words):

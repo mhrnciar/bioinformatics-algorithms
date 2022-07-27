@@ -4,10 +4,10 @@
 #   Output: All most frequent k-mers with up to d mismatches in Text
 
 from utils import text
-from py.ch01.E01G_hamming_distance import ApproximatePatternCount
-from py.ch01.E01L_pattern_to_number import PatternToNumber
-from py.ch01.E01M_number_to_pattern import NumberToPattern
-from py.ch01.E01N_d_neighborhood import Neighbors
+from ch01.E01G_hamming_distance import ApproximatePatternCount
+from ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01M_number_to_pattern import NumberToPattern
+from ch01.E01N_d_neighborhood import Neighbors
 
 
 def MismatchFrequentWords(genome, k, threshold):

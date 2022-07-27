@@ -3,8 +3,8 @@
 #   Input: Strings Pattern and Genome
 #   Output: All starting positions in Genome where Pattern appears as a substring
 
-from py.ch01.E01A_pattern_count import PatternCount
-from py.ch01.E01C_reverse_complement import ReverseComplement
+from ch01.E01A_pattern_count import PatternCount
+from ch01.E01C_reverse_complement import ReverseComplement
 
 
 # Complexity:

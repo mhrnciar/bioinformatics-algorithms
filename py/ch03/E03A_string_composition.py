@@ -1,7 +1,7 @@
 # String Composition Problem:
 # Generate the k-mer composition of a string
 #   Input: A string Text and an integer k
-#   Output: COMPOSITIONk(Text), where the k-mers are arranged in lexicographic order
+#   Output: COMPOSITION_k(Text), where the k-mers are arranged in lexicographic order
 
 from utils import text
 

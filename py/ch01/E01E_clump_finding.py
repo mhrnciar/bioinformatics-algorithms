@@ -4,9 +4,9 @@
 #   Output: All distinct k-mers forming (L, t)-clumps in Genome
 
 from utils import text
-from py.ch01.E01K_frequency_array import ComputeFrequencies
-from py.ch01.E01L_pattern_to_number import PatternToNumber
-from py.ch01.E01M_number_to_pattern import NumberToPattern
+from ch01.E01K_frequency_array import ComputeFrequencies
+from ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01M_number_to_pattern import NumberToPattern
 
 
 # Complexity:
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     _window_len = int(input("L: "))
     _threshold = int(input("t: "))
 
-    for word in FastFindClumps(_genome, _k, _window_len, _threshold):
+    for word in FindClumpsWithFrequencies(_genome, _k, _window_len, _threshold):
         print(word)

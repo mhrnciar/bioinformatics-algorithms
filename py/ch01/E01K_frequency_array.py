@@ -1,5 +1,5 @@
 from utils import text
-from py.ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01L_pattern_to_number import PatternToNumber
 
 
 def ComputeFrequencies(genome, k):

@@ -15,7 +15,7 @@ def PatternCount(genome, pattern):
     indices = []
 
     # Cycle through the string and compare each substring with passed pattern
-    for i in range(len(genome) - len(pattern)):
+    for i in range(len(genome) - len(pattern) + 1):
         if text(genome, i, len(pattern)) == pattern:
             count += 1
             indices.append("^")

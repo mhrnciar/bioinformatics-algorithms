@@ -4,8 +4,10 @@
 #   Output: All most frequent k-mers in Text
 
 from utils import text
-from py.ch01.E01A_pattern_count import PatternCount
-from py.ch01.E01K_frequency_array import ComputeFrequencies
+from ch01.E01A_pattern_count import PatternCount
+from ch01.E01K_frequency_array import ComputeFrequencies
+from ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01M_number_to_pattern import NumberToPattern
 
 
 # Complexity:
