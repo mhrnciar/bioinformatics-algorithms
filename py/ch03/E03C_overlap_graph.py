@@ -31,4 +31,3 @@ if __name__ == "__main__":
 
     for _word in OverlapGraph(_patterns):
         print(_word)
-

@@ -1,5 +1,5 @@
-from py.utils import text, read_lines, score, bases
-from py.ch02.E02C_profile_most_probable_kmer import MostProbableKmer
+from utils import text, read_lines, score, bases
+from ch02.E02C_profile_most_probable_kmer import MostProbableKmer
 
 
 def GreedyMotifSearch(dna, k, t):

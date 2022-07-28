@@ -4,10 +4,10 @@
 #   Output: A k-mer Pattern minimizing d(Pattern, Dna) among all k-mers Pattern
 
 from utils import text, read_lines, generate_patterns, bases
-from py.ch01.E01G_hamming_distance import HammingDistance
-from py.ch01.E01L_pattern_to_number import PatternToNumber
-from py.ch01.E01M_number_to_pattern import NumberToPattern
-from py.ch02.E02H_distance_patterns_strings import DistanceBetweenPatternsStrings
+from ch01.E01G_hamming_distance import HammingDistance
+from ch01.E01L_pattern_to_number import PatternToNumber
+from ch01.E01M_number_to_pattern import NumberToPattern
+from ch02.E02H_distance_patterns_strings import DistanceBetweenPatternsStrings
 
 
 def MinHammingDistance(genome, pattern, k):

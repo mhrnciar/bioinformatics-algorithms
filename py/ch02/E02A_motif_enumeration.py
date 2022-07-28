@@ -4,7 +4,7 @@
 #   Output: All (k, d)-motifs in Dna
 
 from utils import text, read_lines
-from py.ch01.E01N_d_neighborhood import Neighbors
+from ch01.E01N_d_neighborhood import Neighbors
 
 
 def MotifEnumeration(dna, k, d):

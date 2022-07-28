@@ -1,7 +1,7 @@
 from random import randint
 
 from utils import text, read_lines, bases, symbol_key
-from py.ch01.E01G_hamming_distance import HammingDistance
+from ch01.E01G_hamming_distance import HammingDistance
 
 
 def Score(motifs):

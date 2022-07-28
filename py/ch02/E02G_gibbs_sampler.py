@@ -1,8 +1,8 @@
 from random import randint
 
 from utils import text, read_lines, bases, symbol_key
-from py.ch01.E01G_hamming_distance import HammingDistance
-from py.ch02.E02F_randomized_motif_search import ProfileMostProbableKmer, ProfileWithPseudocounts, Score
+from ch01.E01G_hamming_distance import HammingDistance
+from ch02.E02F_randomized_motif_search import ProfileMostProbableKmer, ProfileWithPseudocounts, Score
 
 
 def GibbsSampler(dna, k, t, n):

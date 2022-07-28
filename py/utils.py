@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 plt.ion()
 
-bases = ['A', 'T', 'C', 'G']
+bases = ['A', 'C', 'G', 'T']
 
 complement_key = {
     'C': 'G',

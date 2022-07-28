@@ -1,7 +1,7 @@
 import fileinput
 
 from utils import text
-from py.ch01.E01G_hamming_distance import HammingDistance
+from ch01.E01G_hamming_distance import HammingDistance
 
 
 def DistanceBetweenPatternsStrings(dna, pattern):
