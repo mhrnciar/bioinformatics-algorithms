@@ -1,64 +1,71 @@
-from utils import text, read_lines
+from random import choice
+import networkx as nx
+
+from utils import read_lines, parse_adj_list, remove_edge
 
 
 def EulerCycle(graph):
-    edges = {}
+    start_node, edges = choice(list(graph.items()))
+    target_node = choice(edges)
 
-    for edge in graph:
-        node_out, node_in = edge.split(' -> ')
-        node_out = int(node_out)
-        node_in = [int(x) for x in node_in.split(',')]
+    graph = remove_edge(graph, start_node, target_node)
 
-        if node_out not in edges:
-            edges[node_out] = []
+    cycle = [start_node, target_node]
+    current_node = target_node
 
-        for node in node_in:
-            edges[node_out].append(node)
+    while current_node != start_node:
+        edges = graph[current_node]
+        target_node = choice(edges)
 
-    current_node = list(edges.keys())[0]
-    path = [current_node]
+        graph = remove_edge(graph, current_node, target_node)
 
-    # Get the initial cycle.
-    while True:
-        path.append(edges[current_node][0])
+        current_node = target_node
+        cycle.append(current_node)
 
-        if len(edges[current_node]) == 1:
-            del edges[current_node]
-        else:
-            edges[current_node] = edges[current_node][1:]
+    while graph:
+        potential_starts = [(idx, node) for idx, node in enumerate(cycle) if node in graph]
+        idx, new_start = choice(potential_starts)
 
-        if path[-1] in edges:
-            current_node = path[-1]
-        else:
-            break
+        new_cycle = cycle[idx:] + cycle[1:idx + 1]
+        edges = graph[new_start]
+        target_node = choice(edges)
 
-    while len(edges) > 0:
-        for i in range(len(path)):
-            if path[i] in edges:
-                current_node = path[i]
-                cycle = [current_node]
+        graph = remove_edge(graph, new_start, target_node)
 
-                while True:
-                    cycle.append(edges[current_node][0])
+        current_node = target_node
+        new_cycle.append(current_node)
 
-                    if len(edges[current_node]) == 1:
-                        del edges[current_node]
-                    else:
-                        edges[current_node] = edges[current_node][1:]
+        while current_node != new_start:
+            edges = graph[current_node]
+            target_node = choice(edges)
 
-                    if cycle[-1] in edges:
-                        current_node = cycle[-1]
-                    else:
-                        break
+            graph = remove_edge(graph, current_node, target_node)
 
-                path = path[:i] + cycle + path[i + 1:]
-                break
+            current_node = target_node
+            new_cycle.append(current_node)
+
+        cycle = new_cycle
+
+    return cycle
+
+
+def EulerCycleVar(graph):
+    edges = [line.strip().split(' -> ') for line in graph]
+
+    G = nx.DiGraph()
+    for edge in edges:
+        for node in edge[1].split(','):
+            G.add_edge(edge[0], node)
+
+    path = [str(e[0]) for e in nx.eulerian_circuit(G)]
+    path.append(path[0])
 
     return path
 
 
 if __name__ == "__main__":
-    _graph = read_lines('Adjacency list, end with', end_with=' ')
+    _graph = read_lines('Adjacency list, end with ', end_with=' ')
+    _graph = parse_adj_list(_graph)
 
     _path = EulerCycle(_graph)
 

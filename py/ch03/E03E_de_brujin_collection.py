@@ -6,14 +6,14 @@
 from utils import text, read_lines, prefix, suffix
 
 
-def DeBrujinCollection(patterns):
+def DeBrujinCollection(patterns, head=prefix, tail=suffix):
     graph = {}
 
     for pattern in patterns:
-        if prefix(pattern) not in graph:
-            graph[prefix(pattern)] = [suffix(pattern)]
+        if head(pattern) not in graph:
+            graph[head(pattern)] = [tail(pattern)]
         else:
-            graph[prefix(pattern)].append(suffix(pattern))
+            graph[head(pattern)].append(tail(pattern))
 
     return graph
 

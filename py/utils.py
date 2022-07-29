@@ -49,6 +49,23 @@ def generate_patterns(k: int, arr: [str] = None, prefix: str = "") -> [str]:
     return arr
 
 
+def generate_binary_patterns(k: int):
+    result = []
+
+    def generate(string, n):
+        if n == 0:
+            result.append(string)
+
+            if len(result) == 2:
+                return result
+        else:
+            generate((string + '0'), n - 1)
+            generate((string + '1'), n - 1)
+
+    generate('', k)
+    return result
+
+
 def read_txt(path: str, skip_num: int = 1) -> str:
     with open(path, 'r') as f:
         seq = ""
@@ -66,7 +83,7 @@ def read_txt(path: str, skip_num: int = 1) -> str:
         return seq
 
 
-def read_lines(prompt='DNA strings separated with newlines, end with ', end_with='int'):
+def read_lines(prompt: str ='DNA strings separated with newlines, end with ', end_with: str ='int'):
     result = []
     val = 0
 
@@ -109,12 +126,53 @@ def read_lines(prompt='DNA strings separated with newlines, end with ', end_with
         return result, val
 
 
-def prefix(pattern, back=1):
-    return pattern[0:len(pattern) - back]
+def parse_adj_list(graph: [str]) -> {int: [int]}:
+    edges = {}
+
+    for edge in graph:
+        node_out, node_in = edge.split(' -> ')
+        node_out = int(node_out)
+        node_in = [int(x) for x in node_in.split(',')]
+
+        if node_out not in edges:
+            edges[node_out] = []
+
+        for node in node_in:
+            edges[node_out].append(node)
+
+    return edges
 
 
-def suffix(pattern, front=1):
-    return pattern[front:len(pattern)]
+def remove_edge(graph: {int: [int]}, start_node: int, target_node: int) -> {int: [int]}:
+    graph[start_node].remove(target_node)
+
+    if not graph[start_node]:
+        del graph[start_node]
+
+    return graph
+
+
+def prefix(pattern: str, back: int = 1) -> str:
+    return pattern[0:-back]
+
+
+def suffix(pattern: str, front: int = 1) -> str:
+    return pattern[front:]
+
+
+def pair_prefix(pair: (str, str), back: int = 1) -> (str, str):
+    a, b = pair
+    return a[0:-back], b[0:-back]
+
+
+def pair_suffix(pair: (str, str), front: int = 1) -> (str, str):
+    a, b = pair
+    return a[front:], b[front:]
+
+
+def create_pair(string: str, delim: str = '|') -> (str, str):
+    a, b = string.split(delim)
+    return a, b
 
 
 def entropy(dist: [float]) -> float:
@@ -129,7 +187,7 @@ def entropy(dist: [float]) -> float:
     return -total
 
 
-def score(motifs):
+def score(motifs: [str]) -> int:
     total = 0
 
     for i in range(len(motifs[0])):
