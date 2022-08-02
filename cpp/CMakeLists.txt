@@ -81,5 +81,37 @@ add_executable(E01N_d_neighborhood
         ch01/E01G_hamming_distance.cpp
         utils.cpp)
 
+# CHAPTER 2
+add_executable(E02A_motif_enumeration
+        ch02/E02A_motif_enumeration.cpp
+        ch01/E01N_d_neighborhood.cpp
+        ch01/E01G_hamming_distance.cpp
+        utils.cpp)
 
+add_executable(E02B_median_string
+        ch02/E02B_median_string.cpp
+        ch01/E01G_hamming_distance.cpp
+        ch01/E01L_pattern_to_number.cpp
+        ch01/E01M_number_to_pattern.cpp
+        ch02/E02H_distance_pattern_strings.cpp
+        utils.cpp)
+
+add_executable(E02C_profile_most_probable_kmer
+        ch02/E02C_profile_most_probable_kmer.cpp
+        utils.cpp)
+
+add_executable(E02D_greedy_motif_search
+        ch02/E02D_greedy_motif_search.cpp
+        ch02/E02C_profile_most_probable_kmer.cpp
+        utils.cpp)
+
+add_executable(E02E_greedy_motif_search_pseudocounts
+        ch02/E02E_greedy_motif_search_pseudocounts.cpp
+        ch02/E02C_profile_most_probable_kmer.cpp
+        utils.cpp)
+
+add_executable(E02H_distance_pattern_strings
+        ch02/E02H_distance_pattern_strings.cpp
+        ch01/E01G_hamming_distance.cpp
+        utils.cpp)
 

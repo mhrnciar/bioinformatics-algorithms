@@ -4,6 +4,10 @@
 
 #include "E01A_pattern_count.h"
 
+string Text(const string &genome, unsigned long i, unsigned long pattern_len) {
+    return genome.substr(i, pattern_len);
+}
+
 tuple< int, vector<char> > PatternCount(const string &genome, const string &pattern) {
     int count = 0;
     vector<char> indices;

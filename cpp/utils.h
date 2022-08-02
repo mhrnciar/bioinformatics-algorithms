@@ -5,20 +5,24 @@
 #ifndef CPP_UTIL_H
 #define CPP_UTIL_H
 
+#include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <list>
 #include <set>
 #include <map>
 
+#include "ch01/E01A_pattern_count.h"
+
 using namespace std;
 
 static map<char, char> complement_key = {
         { 'A', 'T' },
-        { 'T', 'A' },
         { 'C', 'G' },
-        { 'G', 'C' }
+        { 'G', 'C' },
+        { 'T', 'A' }
 };
 
 static map<char, int> symbol_key = {
@@ -35,8 +39,16 @@ static map<int, char> number_key = {
         { 3, 'T' }
 };
 
-static vector<string> bases = {"C", "G", "A", "T"};
+static vector<string> bases = {"A", "C", "G", "T"};
 
 string Text(const string &genome, unsigned long i, unsigned long pattern_len);
+
+vector<string> ReadLines(const string& prompt = "DNA strings separated with newlines, end with enter:");
+
+vector<string> GeneratePatterns(int k, vector<string> arr, const string &prefix = "");
+
+vector< vector<float> > GenerateProbs(int n);
+
+int Score(const vector<string> &motifs);
 
 #endif //CPP_UTIL_H
