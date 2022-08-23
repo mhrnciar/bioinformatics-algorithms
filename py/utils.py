@@ -16,6 +16,13 @@ complement_key = {
     'T': 'A'
 }
 
+rna_complement_key = {
+    'C': 'G',
+    'G': 'C',
+    'A': 'U',
+    'U': 'A'
+}
+
 symbol_key = {
     'A': 0,
     'C': 1,
@@ -30,10 +37,9 @@ number_key = {
     3: 'T'
 }
 
-
-amino_acid_dict = {
+codon_dict = {
     'AUA': 'I', 'AUC': 'I', 'AUU': 'I', 'AUG': 'M',
-    'ACA': 'U', 'ACC': 'U', 'ACG': 'U', 'ACU': 'U',
+    'ACA': 'T', 'ACC': 'T', 'ACG': 'T', 'ACU': 'T',
     'AAC': 'N', 'AAU': 'N', 'AAA': 'K', 'AAG': 'K',
     'AGC': 'S', 'AGU': 'S', 'AGA': 'R', 'AGG': 'R',
     'CUA': 'L', 'CUC': 'L', 'CUG': 'L', 'CUU': 'L',
@@ -51,19 +57,48 @@ amino_acid_dict = {
 }
 
 
+amino_mass_dict = {
+    'G': 57, 'A': 71, 'S': 87, 'P': 97, 'V': 99,
+    'T': 101, 'C': 103, 'I': 113, 'L': 113, 'N': 114,
+    'D': 115, 'K': 128, 'Q': 128, 'E': 129, 'M': 131,
+    'H': 137, 'F': 147, 'R': 156, 'Y': 163, 'W': 186
+}
+
+
 def text(genome: str, i: int, pattern_len: int) -> str:
     return genome[i:i+pattern_len]
 
 
-def generate_patterns(k: int, arr: [str] = None, prefix: str = "") -> [str]:
+def dna_to_rna(dna: str) -> str:
+    return dna.replace('T', 'U')
+
+
+def rna_to_dna(rna: str) -> str:
+    return rna.replace('U', 'T')
+
+
+def generate_combinations(string: str) -> [str]:
+    substrings = set()
+    substrings.add(string)
+
+    string += string
+
+    for i in range(len(string)):
+        for j in range(1, len(string) // 2):
+            substrings.add(text(string, i, j))
+
+    return list(substrings)
+
+
+def generate_patterns(k: int, arr: [str] = None, _prefix: str = "") -> [str]:
     if arr is None:
         arr = list()
     if k == 0:
-        arr.append(prefix)
+        arr.append(_prefix)
         return arr
 
     for base in bases:
-        new_prefix = prefix + base
+        new_prefix = _prefix + base
         generate_patterns(k - 1, arr, new_prefix)
 
     return arr
@@ -258,7 +293,7 @@ def generate_probs(n: int) -> pd.DataFrame:
 def display_logo(dna: [str], save: bool = False, fig_path: str = '', fig_name: str = 'logo'):
     df = motif_score(dna, score_type='profile')
 
-    logo = logomaker.Logo(df, font_name='Arial Rounded MT Bold')
+    _ = logomaker.Logo(df, font_name='Arial Rounded MT Bold')
 
     if save:
         if fig_path[-1] != '/':

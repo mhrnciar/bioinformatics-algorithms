@@ -3,15 +3,18 @@
 #   Input: A DNA string Pattern
 #   Output: Pattern, the reverse complement of Pattern
 
-from utils import complement_key
+from utils import complement_key, rna_complement_key
 
 
 # Complexity: O(n)
-def ReverseComplement(pattern):
+def ReverseComplement(pattern, rna=False):
     result = ""
 
     for i in range(len(pattern) - 1, -1, -1):
-        result += complement_key.get(pattern[i])
+        if rna:
+            result += rna_complement_key.get(pattern[i])
+        else:
+            result += complement_key.get(pattern[i])
 
     return pattern, result
 
