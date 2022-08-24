@@ -11,9 +11,9 @@ def DeBrujinCollection(patterns, head=prefix, tail=suffix):
 
     for pattern in patterns:
         if head(pattern) not in graph:
-            graph[head(pattern)] = {tail(pattern)}
+            graph[head(pattern)] = [tail(pattern)]
         else:
-            graph[head(pattern)].add(tail(pattern))
+            graph[head(pattern)].append(tail(pattern))
 
     return graph
 

@@ -5,8 +5,8 @@ from ch03.E03E_de_brujin_collection import DeBrujinCollection
 @pytest.mark.E03E_de_brujin_collection
 def test_default():
     _genome = ['GAGG', 'CAGG', 'GGGG', 'GGGA', 'CAGG', 'AGGG', 'GGAG']
-    assert DeBrujinCollection(_genome) == {'AGG': {'GGG'}, 'CAG': {'AGG', 'AGG'}, 'GAG': {'AGG'},
-                                           'GGA': {'GAG'}, 'GGG': {'GGG', 'GGA'}}
+    assert DeBrujinCollection(_genome) == {'AGG': ['GGG'], 'CAG': ['AGG', 'AGG'], 'GAG': ['AGG'],
+                                           'GGA': ['GAG'], 'GGG': ['GGG', 'GGA']}
 
 
 @pytest.mark.E03E_de_brujin_collection
@@ -22,6 +22,6 @@ def test_large():
 
     for item in _temp:
         mapping = item.split(' -> ')
-        _result[mapping[0]] = set(mapping[1].split(', '))
+        _result[mapping[0]] = mapping[1].split(', ')
 
     assert DeBrujinCollection(_genome) == _result

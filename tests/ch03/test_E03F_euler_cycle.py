@@ -3,6 +3,7 @@ from ch03.E03F_euler_cycle import EulerCycle, EulerCycleVar
 from utils import parse_adj_list
 
 
+# Many possible cycles, the test might fail
 @pytest.mark.E03F_euler_cycle
 def test_default():
     _graph = parse_adj_list(['0 -> 3', '1 -> 0', '2 -> 1,6', '3 -> 2', '4 -> 2',
@@ -10,6 +11,7 @@ def test_default():
     assert '->'.join(map(str, EulerCycle(_graph))) == '6->8->7->9->6->5->4->2->1->0->3->2->6'
 
 
+# Many possible cycles, the test might fail
 @pytest.mark.E03F_euler_cycle
 def test_large():
     f = open('../rosalind/rosalind_ba3f.txt', 'r')
