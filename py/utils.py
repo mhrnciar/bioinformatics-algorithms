@@ -387,6 +387,17 @@ def is_consistent(_peptide, spectrum):
     return True
 
 
+def linear_spectrum(peptide):
+    def get_pairs():
+        return [(i, j) for i in range(len(peptide)) for j in range(len(peptide) + 1) if i < j]
+
+    result = [sum(peptide[i:j]) for (i, j) in get_pairs()]
+    result.append(0)
+    result.sort()
+
+    return result
+
+
 def cyclo_spectrum(_peptide):
     def get_pairs(index_range):
         return [(i, j) for i in index_range for j in range(i, i + len(index_range)) if j != i]
@@ -396,17 +407,6 @@ def cyclo_spectrum(_peptide):
 
     result.append(0)
     result.append(sum(_peptide))
-    result.sort()
-
-    return result
-
-
-def linear_spectrum(peptide):
-    def get_pairs():
-        return [(i, j) for i in range(len(peptide)) for j in range(len(peptide) + 1) if i < j]
-
-    result = [sum(peptide[i:j]) for (i, j) in get_pairs()]
-    result.append(0)
     result.sort()
 
     return result

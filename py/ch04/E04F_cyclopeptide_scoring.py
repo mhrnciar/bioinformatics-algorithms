@@ -7,7 +7,8 @@ from utils import amino_mass_dict, count_matches_in_spectra, cyclo_spectrum
 
 
 def CyclopeptideScore(peptide, spectrum, spect_from_peptide=cyclo_spectrum):
-    peptide = [amino_mass_dict.get(x) for x in peptide]
+    if len(peptide) > 0 and isinstance(peptide[0], str):
+        peptide = [amino_mass_dict.get(x) for x in peptide]
     return count_matches_in_spectra(spect_from_peptide(peptide), spectrum)
 
 
