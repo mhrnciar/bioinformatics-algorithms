@@ -5,7 +5,8 @@
 
 import pandas as pd
 
-from utils import text, generate_probs, bases
+from utils import text, generate_probs
+from dictionaries import bases
 
 
 def MostProbableKmer(genome, k, matrix=None):

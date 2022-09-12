@@ -3,7 +3,7 @@
 #   Input: A DNA string Pattern
 #   Output: Pattern, the reverse complement of Pattern
 
-from utils import complement_key, rna_complement_key
+from dictionaries import complement_key, rna_complement_key
 
 
 # Complexity: O(n)

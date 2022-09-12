@@ -1,4 +1,4 @@
-from utils import bases
+from dictionaries import bases
 from ch01.E01G_hamming_distance import HammingDistance
 
 

@@ -3,7 +3,8 @@
 #   Input: An RNA string Pattern and the array GENETICCODE
 #   Output: The translation of Pattern into an amino acid string Peptide
 
-from utils import codon_dict, text, dna_to_rna
+from utils import text, dna_to_rna
+from dictionaries import codon_dict
 
 
 def TranslateProtein(pattern, translate=False):

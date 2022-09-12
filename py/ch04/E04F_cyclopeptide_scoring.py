@@ -3,7 +3,8 @@
 #   Input: An amino acid string Peptide and a collection of integers Spectrum
 #   Output: The score of Peptide against Spectrum, SCORE(Peptide, Spectrum)
 
-from utils import amino_mass_dict, count_matches_in_spectra, cyclo_spectrum
+from utils import count_matches_in_spectra, cyclo_spectrum
+from dictionaries import amino_mass_dict
 
 
 def CyclopeptideScore(peptide, spectrum, spect_from_peptide=cyclo_spectrum):

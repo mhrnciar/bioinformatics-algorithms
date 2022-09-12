@@ -1,4 +1,4 @@
-from utils import symbol_key
+from dictionaries import symbol_key
 
 
 def PatternToNumber(pattern):

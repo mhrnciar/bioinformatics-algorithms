@@ -1,4 +1,5 @@
-from utils import linear_spectrum, amino_mass_dict
+from utils import linear_spectrum
+from dictionaries import amino_mass_dict
 
 
 def LinearSpectrumFromString(peptide):

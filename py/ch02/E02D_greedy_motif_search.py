@@ -1,4 +1,5 @@
-from utils import text, read_lines, score, bases
+from utils import text, read_lines, score
+from dictionaries import bases
 from ch02.E02C_profile_most_probable_kmer import MostProbableKmer
 
 

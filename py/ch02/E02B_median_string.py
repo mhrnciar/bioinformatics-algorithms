@@ -3,7 +3,8 @@
 #   Input: A collection of strings Dna and an integer k
 #   Output: A k-mer Pattern minimizing d(Pattern, Dna) among all k-mers Pattern
 
-from utils import text, read_lines, generate_patterns, bases
+from utils import text, read_lines, generate_patterns
+from dictionaries import bases
 from ch01.E01G_hamming_distance import HammingDistance
 from ch01.E01L_pattern_to_number import PatternToNumber
 from ch01.E01M_number_to_pattern import NumberToPattern

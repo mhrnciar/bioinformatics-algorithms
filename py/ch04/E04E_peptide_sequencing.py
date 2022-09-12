@@ -4,7 +4,8 @@
 #   Output: A cyclic peptide Peptide maximizing SCORE(Peptide, Spectrum) over all peptides
 #   Peptide with mass equal to PARENTMASS(Spectrum)
 
-from utils import amino_mass_dict, cyclo_spectrum, mass, parent_mass, expand, is_consistent
+from utils import cyclo_spectrum, mass, parent_mass, expand, is_consistent
+from dictionaries import amino_mass_dict
 
 
 def CyclopeptideSequencing(spectrum):

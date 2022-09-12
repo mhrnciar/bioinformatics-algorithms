@@ -3,7 +3,8 @@
 #   Input: An amino acid string Peptide
 #   Output: CYCLOSPECTRUM(Peptide)
 
-from utils import generate_combinations, amino_mass_dict
+from utils import generate_combinations
+from dictionaries import amino_mass_dict
 
 
 def GenerateCyclospectrum(peptide, return_type=int):

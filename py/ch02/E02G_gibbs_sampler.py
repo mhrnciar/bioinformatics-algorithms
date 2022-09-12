@@ -1,6 +1,7 @@
 from random import randint
 
-from utils import text, read_lines, bases, symbol_key
+from utils import text, read_lines
+from dictionaries import bases, symbol_key
 from ch01.E01G_hamming_distance import HammingDistance
 from ch02.E02F_randomized_motif_search import ProfileMostProbableKmer, ProfileWithPseudocounts, Score
 

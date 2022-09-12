@@ -1,6 +1,7 @@
 from ch04.E04F_cyclopeptide_scoring import CyclopeptideScore
 from ch04.E04L_leaderboard_trimming import Trim
-from utils import parent_mass, expand, mass, linear_spectrum, amino_mass_dict
+from utils import parent_mass, expand, mass, linear_spectrum
+from dictionaries import amino_mass_dict
 
 
 def LeaderboardCyclopeptideSequencing(spectrum, n, spect1=linear_spectrum, spect2=linear_spectrum):

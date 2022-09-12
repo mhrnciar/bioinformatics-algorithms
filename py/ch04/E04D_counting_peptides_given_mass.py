@@ -3,7 +3,7 @@
 #   Input: An integer m
 #   Output: The number of linear peptides having integer mass m
 
-from utils import amino_mass_dict
+from dictionaries import amino_mass_dict
 
 
 def CountPeptides(total_mass):

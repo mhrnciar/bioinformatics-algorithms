@@ -1,4 +1,4 @@
-from utils import number_key
+from dictionaries import number_key
 
 
 def NumberToPattern(num, k):

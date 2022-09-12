@@ -4,11 +4,11 @@ from utils import cyclo_spectrum
 
 
 def ConvolutionCyclopeptideSequencing(m, n, spectrum, low_mass=57, high_mass=200):
-    def get_masses_from_spectrum():
+    def get_masses_from_spectrum(_spectrum):
         masses = []
         last_count = 0
 
-        for mass, count in SpectralConvolution(spectrum):
+        for mass, count in SpectralConvolution(_spectrum):
             if low_mass <= mass <= high_mass:
                 if len(masses) < m:
                     masses.append(mass)
@@ -21,7 +21,7 @@ def ConvolutionCyclopeptideSequencing(m, n, spectrum, low_mass=57, high_mass=200
 
         return masses
 
-    return LeaderboardCyclopeptideSequencing(n, spectrum, spect1=get_masses_from_spectrum(), spect2=cyclo_spectrum)
+    return LeaderboardCyclopeptideSequencing(spectrum, n, spect1=get_masses_from_spectrum, spect2=cyclo_spectrum)
 
 
 if __name__ == '__main__':
