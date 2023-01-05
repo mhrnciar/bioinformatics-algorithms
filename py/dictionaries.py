@@ -1,3 +1,6 @@
+import os
+import pandas as pd
+
 bases = ['A', 'C', 'G', 'T']
 
 complement_key = {
@@ -28,14 +31,12 @@ number_key = {
     3: 'T'
 }
 
-
 skew_step = {
     'A': 0,
     'C': -1,
     'G': +1,
     'T': 0
 }
-
 
 codon_dict = {
     'AUA': 'I', 'AUC': 'I', 'AUU': 'I', 'AUG': 'M',
@@ -55,7 +56,6 @@ codon_dict = {
     'UAC': 'Y', 'UAU': 'Y', 'UAA': '_', 'UAG': '_',
     'UGC': 'C', 'UGU': 'C', 'UGA': '_', 'UGG': 'W',
 }
-
 
 amino_mass_dict = {
     'G': 57, 'A': 71, 'S': 87, 'P': 97, 'V': 99,
@@ -116,11 +116,17 @@ amino_acids = {
 
 class BLOSUM62:
     def __init__(self):
-        import os
-
         with open(os.path.join(os.path.dirname(__file__), '../data/BLOSUM62.txt')) as input_data:
             items = [line.strip().split() for line in input_data.readlines()]
             self.scoring_matrix = {(item[0], item[1]): int(item[2]) for item in items}
 
     def __getitem__(self, pair):
         return self.scoring_matrix[pair[0], pair[1]]
+
+
+class PAM250(object):
+    def __init__(self):
+        self.scoring_matrix = pd.read_table(os.path.join(os.path.dirname(__file__), '../data/PAM250.txt'), sep='  ', engine='python')
+
+    def __getitem__(self, pair):
+        return self.scoring_matrix[pair[0]][pair[1]]

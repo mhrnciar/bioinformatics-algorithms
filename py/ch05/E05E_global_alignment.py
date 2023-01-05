@@ -7,12 +7,10 @@
 import numpy as np
 
 from dictionaries import BLOSUM62
+from utils import insert_indel
 
 
 def GlobalAlignment(v, w, scoring_matrix, sigma):
-    def insert_indel(word, index):
-        return word[:index] + '-' + word[index:]
-
     s = np.zeros((len(v) + 1, len(w) + 1), dtype=int)
     backtrack = np.zeros((len(v) + 1, len(w) + 1), dtype=int)
 

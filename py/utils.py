@@ -1,11 +1,12 @@
 import fileinput
-import logomaker
+# import logomaker
 import numpy as np
 import pandas as pd
 
 from dictionaries import bases, symbol_key, number_key, amino_acids
 
 import matplotlib.pyplot as plt
+
 plt.ion()
 
 
@@ -234,6 +235,7 @@ def generate_probs(n: int) -> pd.DataFrame:
     return df
 
 
+'''
 def display_logo(dna: [str], save: bool = False, fig_path: str = '', fig_name: str = 'logo'):
     df = motif_score(dna, score_type='profile')
 
@@ -245,6 +247,7 @@ def display_logo(dna: [str], save: bool = False, fig_path: str = '', fig_name: s
         plt.savefig('{}{}.pdf'.format(fig_path, fig_name))
 
     plt.show()
+'''
 
 
 def get_weight(peptide):
@@ -342,3 +345,7 @@ def topological_ordering(graph):
         candidates = candidates[1:]
 
     return ordering
+
+
+def insert_indel(word, i):
+    return word[:i] + '-' + word[i:]
