@@ -143,6 +143,19 @@ def parse_adj_list(graph: [str]) -> {int: [int]}:
     return edges
 
 
+def parse_permutation(p: str) -> [int]:
+    p = p.lstrip('(').rstrip(')').split(')(')
+    s = [list(map(int, block.split())) for block in p]
+    return s
+
+
+def format_permutation(item):
+    if item < 0:
+        return str(item)
+    else:
+        return '+' + str(item)
+
+
 def remove_edge(graph: {int: [int]}, start_node: int, target_node: int) -> {int: [int]}:
     graph[start_node].remove(target_node)
 
