@@ -4,7 +4,13 @@
 #   Output: All k-mers shared by these strings, in the form of ordered pairs (x, y) corresponding to starting
 #   positions of these k-mers in the respective strings
 
-from ch01.E01C_reverse_complement import ReverseComplement
+
+def ReverseComplement(nucleic_acid):
+    nucleotide = 'ATCG'
+    complement = 'TAGC'
+    transtab = str.maketrans(nucleotide, complement)
+
+    return nucleic_acid.translate(transtab)[::-1].lstrip()
 
 
 def create_frequency_table(string, k):

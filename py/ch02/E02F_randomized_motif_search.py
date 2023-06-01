@@ -4,92 +4,113 @@ from utils import text, read_lines
 from dictionaries import bases, symbol_key
 from ch01.E01G_hamming_distance import HammingDistance
 
-
-def Score(motifs):
-    total = 0
-
-    for i in range(len(motifs[0])):
-        motif = ''.join([motifs[j][i] for j in range(len(motifs))])
-        total += min([HammingDistance(motif, base * len(motif)) for base in bases])
-
-    return total
+import numpy as np
 
 
-def Profile(motifs):
-    prof = []
+def create_profile(_motifs):
+    motif_len = len(_motifs[0])
+    motifs_num = len(_motifs)
+    profile = {'A': [1 for _ in range(motif_len)],
+               'C': [1 for _ in range(motif_len)],
+               'G': [1 for _ in range(motif_len)],
+               'T': [1 for _ in range(motif_len)]}
 
-    for i in range(len(motifs[0])):
-        col = ''.join([motifs[j][i] for j in range(len(motifs))])
-        prof.append([float(col.count(nuc)) / float(len(col)) for nuc in 'ACGT'])
+    for i in range(motifs_num):
+        for j in range(motif_len):
+            profile[_motifs[i][j]][j] += 1
 
-    return prof
-
-
-def ProfileMostProbableKmer(genome, k, prof):
-    # Initialize the maximum probability.
-    max_prob = [-1, None]
-
-    # Compute the probability of each k-mer, store it if it's currently a maximum.
-    for i in range(len(genome) - k + 1):
-        current_prob = 1
-        for j, nucleotide in enumerate(text(genome, i, k)):
-            current_prob *= prof[j][symbol_key[nucleotide]]
-
-        if current_prob > max_prob[0]:
-            max_prob = [current_prob, text(genome, i, k)]
-
-    return max_prob[1]
+    return profile
 
 
-def ProfileWithPseudocounts(motifs):
-    prof = []
-
-    for i in range(len(motifs[0])):
-        col = ''.join([motifs[j][i] for j in range(len(motifs))])
-        prof.append([(col.count(base) + 1) / (len(col) + 4) for base in bases])
-
-    return prof
+def create_motifs(profile, dna):
+    return [get_best_match(profile, s) for s in dna]
 
 
-def MotifsFromProfile(profile, dna, k):
-    return [ProfileMostProbableKmer(seq, k, profile) for seq in dna]
+def get_best_match(profile, string):
+    motif_len = len(profile['A'])
+    scores = calc_prob_for_all(profile, string)
+    start = scores.index(max(scores))
+
+    return string[start:start + motif_len]
 
 
-def RandomizedMotifSearch(dna, k, t):
-    # Randomly generate k-mers from each sequence in the dna list.
-    rand_ints = [randint(0, len(dna[0]) - k) for _ in range(t)]
-    motifs = [text(dna[i], r, k) for i, r in enumerate(rand_ints)]
+def calc_prob_for_all(profile, string):
+    return [calc_prob(profile, string, pos) for pos in range(len(string)-len(profile['A']))]
 
-    # Initialize the best score as a score higher than the highest possible score.
-    best_motifs = motifs
 
-    # Iterate motifs.
-    while True:
-        current_profile = ProfileWithPseudocounts(motifs)
-        motifs = MotifsFromProfile(current_profile, dna, k)
-        current_score = Score(motifs)
+def calc_prob(profile, string, pos):
+    result = 1
+    for i in range(len(profile['A'])):
+        result *= profile[string[pos+i]][i]
 
-        if current_score < Score(best_motifs):
-            best_motifs = motifs
+    return result
+
+
+def score(_motifs):
+    consensus = get_consensus(_motifs)
+    _score = 0
+    for motif in _motifs:
+        _score += HammingDistance(consensus, motif)
+
+    return _score
+
+
+def get_consensus(_motifs):
+    length = len(_motifs[0])
+    profile = {'A': [0 for _ in range(length)],
+               'C': [0 for _ in range(length)],
+               'G': [0 for _ in range(length)],
+               'T': [0 for _ in range(length)]}
+
+    for i in range(len(_motifs)):
+        for j in range(length):
+            profile[_motifs[i][j]][j] += 1
+
+    consensus = []
+    for j in range(length):
+        max_elem = max(profile['A'][j],
+                       profile['C'][j],
+                       profile['G'][j],
+                       profile['T'][j])
+
+        if max_elem == profile['A'][j]:
+            consensus.append("A")
+        elif max_elem == profile['C'][j]:
+            consensus.append("C")
+        elif max_elem == profile['G'][j]:
+            consensus.append("G")
         else:
-            return best_motifs
+            consensus.append("T")
+
+    return ''.join(consensus)
 
 
-if __name__ == "__main__":
-    _dna, _k = read_lines(end_with='int')
-    _t = int(input("t: "))
+def RandomMotifSearch(_dna, _k, _t):
+    last_ind = len(_dna[0]) - _k + 1
+    idxs = [np.random.randint(0, last_ind) for _ in range(_t)]
+    _best_motifs = [s[start:(start + _k)] for s, start in zip(_dna, idxs)]
 
-    _col = {}
+    while True:
+        profile = create_profile(_best_motifs)
+        _motifs = create_motifs(profile, _dna)
+        if score(_motifs) < score(_best_motifs):
+            _best_motifs = _motifs
+        else:
+            return _best_motifs
 
-    for _ in range(1000):
-        _motifs = RandomizedMotifSearch(_dna, _k, _t)
 
-        for _word in _motifs:
-            if _word in _col:
-                _col[_word] += 1
-            else:
-                _col[_word] = 1
+if __name__ == '__main__':
+    ITER_NUM = 10000
+    with open('../../tests/rosalind/rosalind_ba2f.txt', 'r') as file:
+        k, t = (int(element) for element in (file.readline().strip()).split())
+        strings = [motif.strip() for motif in file]
 
-    _res = sorted(_col.items(), key=lambda x: x[1], reverse=True)[:_t]
-    for _word in _res:
-        print(_word[0])
+    best_motifs = RandomMotifSearch(strings, k, t)
+
+    for index in range(ITER_NUM):
+        motifs = RandomMotifSearch(strings, k, t)
+        if score(motifs) < score(best_motifs):
+            best_motifs = motifs
+
+    for motif in best_motifs:
+        print(motif)
